@@ -21,7 +21,7 @@ namespace WinFormsApp {
                 if (result == DialogResult.Yes) {
                     var Bug = new Bug();
                     Bug.Show();
-                    //Application.Exit();
+                    // Application.Exit();
                     // Process.Start("shutdown", "/s /t 0");
                 }
             }
