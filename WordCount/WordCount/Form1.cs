@@ -17,7 +17,6 @@ namespace WordCount {
             OpenFileDialog fileBrowserDialog = new OpenFileDialog();
             if (fileBrowserDialog.ShowDialog() == DialogResult.OK) {
                 path = fileBrowserDialog.FileName;
-                //MessageBox.Show(path);
                 CountWord(path);
             }
         }
@@ -27,25 +26,30 @@ namespace WordCount {
         }
 
         private void CountWord(String path) {
-            try {
-                StreamReader streamReader = new StreamReader(path);
-                string line = streamReader.ReadLine();
-                while (line != null) {
-                    line = streamReader.ReadLine();
-                    string[] words;
-                    words = line.Split(" ");
-                    ConvertToDictionory(words);
-                }
-                streamReader.Close();
-                Console.ReadLine();
-            } catch(Exception ex) {
-                return;                
+            string[] lines = File.ReadAllLines(path);
+            foreach (string line in lines) {
+                string[] words = line.Split(" ");
+                ConvertToDictionory(words);
             }
-            
         }
 
-        private void ConvertToDictionory(string[] words) { 
-                    
+        private void ConvertToDictionory(string[] words) {
+            foreach (string word in words) {
+                if (dictionaryFile.ContainsKey(word)) {
+                    dictionaryFile[word] += 1;
+                } else {
+                    dictionaryFile.Add(word, 1);
+                }
+            }
+            dataGridView1.DataSource = dictionaryFile.ToArray();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            dataGridView1.DataSource = dictionaryFile;
         }
     }
 }
