@@ -37,8 +37,8 @@ class TextCalss {
         foreach (var item in tomb) {
             Console.WriteLine(item);
         }
-
     }
+
     /*
         Action szamkiiro = null;
         for (int i = 0; i < 10; i++) {
@@ -50,5 +50,4 @@ class TextCalss {
         }
         szamkiiro();
         */
-
 }
